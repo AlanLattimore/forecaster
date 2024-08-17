@@ -1,0 +1,64 @@
+<%= form_with model: @address, url: { controller: :forecast, action: :create } do |address_form| %>
+  <div class="space-y-12">
+    <div class="border-b border-gray-900/10 pb-12">
+      <h2 class="text-base font-semibold leading-7 text-gray-900">Forecaster</h2>
+      <div>Welcome to <em>Forcaster</em>!</div>
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <%= render Style::StackedInputComponent.new do |component| %>
+          <% component.with_label do %>
+            <%= render Form::LabelComponent.new(form: address_form, method: :street) %>
+          <% end %>
+          <% component.with_input do %>
+            <%= render Form::TextInputComponent.new form: address_form, method: :street, placeholder: "10 Main St." %>
+          <% end %>
+        <% end %>
+        <%= render Style::StackedInputComponent.new do |component| %>
+          <% component.with_label do %>
+            <%= render Form::LabelComponent.new(form: address_form, method: :urb) %>
+          <% end %>
+          <% component.with_input do %>
+            <%= render Form::TextInputComponent.new form: address_form, method: :urb %>
+          <% end %>
+        <% end %>
+        <%= render Style::StackedInputComponent.new do |component| %>
+          <% component.with_label do %>
+            <%= render Form::LabelComponent.new(form: address_form, method: :city) %>
+          <% end %>
+          <% component.with_input do %>
+            <%= render Form::TextInputComponent.new form: address_form, method: :city, placeholder: "Adamant" %>
+          <% end %>
+        <% end %>
+        <%= render Style::StackedInputComponent.new do |component| %>
+          <% component.with_label do %>
+            <%= render Form::LabelComponent.new(form: address_form, method: :municipio) %>
+          <% end %>
+          <% component.with_input do %>
+            <%= render Form::TextInputComponent.new form: address_form, method: :municipio %>
+          <% end %>
+        <% end %>
+        <%= render Style::StackedInputComponent.new do |component| %>
+          <% component.with_label do %>
+            <%= render Form::LabelComponent.new(form: address_form, method: :state) %>
+          <% end %>
+          <% component.with_input do %>
+            <%= render Form::TextInputComponent.new form: address_form, method: :state, placeholder: "Vermont" %>
+          <% end %>
+        <% end %>
+        <%= render Style::StackedInputComponent.new do |component| %>
+          <% component.with_label do %>
+            <%= render Form::LabelComponent.new(form: address_form, method: :zip) %>
+          <% end %>
+          <% component.with_input do %>
+            <%= render Form::TextInputComponent.new form: address_form, method: :zip, placeholder: "05640" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= address_form.button class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" do %>
+      Your Forecast
+    <% end %>
+  </div>
+<% end %>
+
