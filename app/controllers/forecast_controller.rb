@@ -5,10 +5,7 @@ class ForecastController < ApplicationController
 
   def create
     @address = Address.new(address_params)
-    case
-    when !@address.valid?
-      render :new
-    end
+    render :validation_errors unless @address.valid?
   end
 
   private

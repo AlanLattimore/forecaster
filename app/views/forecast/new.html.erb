@@ -1,9 +1,13 @@
 <%= form_with model: @address, url: { controller: :forecast, action: :create } do |address_form| %>
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
-      <h2 class="text-base font-semibold leading-7 text-gray-900">Forecaster</h2>
-      <div>Welcome to <em>Forcaster</em>!</div>
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+      <h2 class="text-base font-semibold leading-7 text-gray-900">Welcome to <em>Forcaster</em>!</h2>
+      <p>Please enter your US street address to get the current temperature in Farenheit, today's high/low, and an extended forecast.</p>
+      <p>Puerto Rico addresses without Urbanization expect at least street and zip OR street, city, and state.</p>
+      <p>A Puerto Rico address with urbanization expects at least street, urb, and municipio.</p>
+      <p>Other US addresses expect at least street and zip OR street, city, and state.</p>
+      <%= turbo_frame_tag "validation_errors" %>
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8">
         <%= render Style::StackedInputComponent.new do |component| %>
           <% component.with_label do %>
             <%= render Form::LabelComponent.new(form: address_form, method: :street) %>
