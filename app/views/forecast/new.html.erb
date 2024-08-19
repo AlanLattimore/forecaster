@@ -6,7 +6,7 @@
       <p>Puerto Rico addresses without Urbanization expect at least street and zip OR street, city, and state.</p>
       <p>A Puerto Rico address with urbanization expects at least street, urb, and municipio.</p>
       <p>Other US addresses expect at least street and zip OR street, city, and state.</p>
-      <%= turbo_frame_tag "validation_errors" %>
+      <%= turbo_frame_tag "flash" %>
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8">
         <%= render Style::StackedInputComponent.new do |component| %>
           <% component.with_label do %>

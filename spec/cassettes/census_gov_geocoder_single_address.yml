@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://geocoding.geo.census.gov/geocoder/locations/address?benchmark=Public_AR_Current&city=Montpelier&format=json&state=Vermont&street=10%20Corse%20St&zip=05602
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.11
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Sun, 18 Aug 2024 22:33:55 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '672'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - DENY
+      Cache-Control:
+      - private, no-store
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1;mode=block
+      Vary:
+      - Origin
+      Set-Cookie:
+      - TS0193e6a1=01283c52a4840d86856e30b825cf92a3b1eeaaeed87ea6b175bee11074e5a71d2b5362aec9b962c9343b3b17b8696070f27726c6dd;
+        Path=/; Domain=.geocoding.geo.census.gov; Secure; HttpOnly;
+    body:
+      encoding: UTF-8
+      string: '{"result":{"input":{"address":{"zip":"05602","city":"Montpelier","street":"10
+        Corse St","state":"Vermont"},"benchmark":{"isDefault":true,"benchmarkDescription":"Public
+        Address Ranges - Current Benchmark","id":"4","benchmarkName":"Public_AR_Current"}},"addressMatches":[{"tigerLine":{"side":"L","tigerLineId":"136666375"},"coordinates":{"x":-72.5749091304874,"y":44.26380948438649},"addressComponents":{"zip":"05602","streetName":"CORSE","preType":"","city":"MONTPELIER","preDirection":"","suffixDirection":"","fromAddress":"2","state":"VT","suffixType":"ST","toAddress":"18","suffixQualifier":"","preQualifier":""},"matchedAddress":"10
+        CORSE ST, MONTPELIER, VT, 05602"}]}}'
+  recorded_at: Sun, 18 Aug 2024 22:33:56 GMT
+recorded_with: VCR 6.2.0

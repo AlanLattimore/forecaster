@@ -2,8 +2,16 @@
 
 class Address
   include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attr_accessor :street, :urb, :city, :municipio, :state, :zip
+  attribute :street, :string
+  attribute :urb, :string
+  attribute :city, :string
+  attribute :municipio, :string
+  attribute :state, :string
+  attribute :zip, :string
+  attribute :latitude, :float
+  attribute :longitude, :float
 
   validates :street, presence: true
   validates :urb, :municipio, presence: true, if: -> (address) { address.urbanized? }

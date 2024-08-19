@@ -36,6 +36,9 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem "addressable", require: false
+gem "faraday"
+gem "faraday-detailed_logger"   # gives a one line log message which is more useful
 gem "view_component", "~> 3.13"
 
 group :development, :test do
@@ -60,5 +63,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "shoulda-matchers", "~> 6.0"
+  gem "shoulda-matchers"
+  gem "vcr"
+  gem "webmock"
 end
