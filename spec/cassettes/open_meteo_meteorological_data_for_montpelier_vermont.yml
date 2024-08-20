@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.open-meteo.com/v1/forecast?current=temperature_2m&daily=temperature_2m_max,temperature_2m_min&forecast_days=7&latitude=44.26380948438649&longitude=-72.5749091304874&temperature_unit=fahrenheit
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.10.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 20 Aug 2024 17:13:53 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJsYXRpdHVkZSI6NDQuMjc0ODg3LCJsb25naXR1ZGUiOi03Mi41Nzc0NSwiZ2VuZXJhdGlvbnRpbWVfbXMiOjEuMzg0MDE5ODUxNjg0NTcwMywidXRjX29mZnNldF9zZWNvbmRzIjowLCJ0aW1lem9uZSI6IkdNVCIsInRpbWV6b25lX2FiYnJldmlhdGlvbiI6IkdNVCIsImVsZXZhdGlvbiI6MjI4LjAsImN1cnJlbnRfdW5pdHMiOnsidGltZSI6Imlzbzg2MDEiLCJpbnRlcnZhbCI6InNlY29uZHMiLCJ0ZW1wZXJhdHVyZV8ybSI6IsKwRiJ9LCJjdXJyZW50Ijp7InRpbWUiOiIyMDI0LTA4LTIwVDE3OjAwIiwiaW50ZXJ2YWwiOjkwMCwidGVtcGVyYXR1cmVfMm0iOjU3Ljd9LCJkYWlseV91bml0cyI6eyJ0aW1lIjoiaXNvODYwMSIsInRlbXBlcmF0dXJlXzJtX21heCI6IsKwRiIsInRlbXBlcmF0dXJlXzJtX21pbiI6IsKwRiJ9LCJkYWlseSI6eyJ0aW1lIjpbIjIwMjQtMDgtMjAiLCIyMDI0LTA4LTIxIiwiMjAyNC0wOC0yMiIsIjIwMjQtMDgtMjMiLCIyMDI0LTA4LTI0IiwiMjAyNC0wOC0yNSIsIjIwMjQtMDgtMjYiXSwidGVtcGVyYXR1cmVfMm1fbWF4IjpbNjAuNSw1OC44LDYzLjUsNzYuMSw3OC41LDc3LjIsNzcuN10sInRlbXBlcmF0dXJlXzJtX21pbiI6WzUzLjAsNTEuNiw1MC44LDQ3LjEsNTIuNyw1NC4zLDU2LjRdfX0=
+  recorded_at: Tue, 20 Aug 2024 17:13:53 GMT
+recorded_with: VCR 6.2.0

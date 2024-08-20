@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rspec"
 
 RSpec.describe Address, type: :model do
   context "outside of Puerto Rico " do

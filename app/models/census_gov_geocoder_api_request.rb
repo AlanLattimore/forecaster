@@ -2,15 +2,14 @@
 
 require "addressable/template"
 
-class CensusGovGeocoder
-  attr_reader :address, :raw
+class CensusGovGeocoderApiRequest
+  attr_reader :error, :address, :raw, :http_status
 
   def initialize(address:)
     @address = address
   end
 
-  def query
-    result_set = CensusGovResultSet.new
+  def get
     connection = Faraday.new(url: uri.to_s) do |builder|
       # Sets the Content-Type header to application/json on each request.
       builder.request :json
@@ -26,18 +25,15 @@ class CensusGovGeocoder
     end
 
     begin
-      @raw                       = connection.get
-      result_set.status          = @raw.status
-      result_set.address_matches = @raw.body["result"]["addressMatches"].map do |address_match|
-        CensusGovAddressMatch.new(address_match: address_match)
-      end
+      @raw   = connection.get
+      http_status = @raw.status
     rescue Faraday::TimeoutError => e
-      result_set.error = e.message
+      error = e.message
     rescue Faraday::Error => e
-      result_set.status = e.response[:status]
-      result_set.error  = e.response[:error]
+      http_status = e.response[:status]
+      error  = e.response[:error]
     end
-    result_set
+    { http_status:, error:, data: @raw&.body&.dig("result") }
   end
 
   def uri
