@@ -60,6 +60,8 @@
           </div>
         </dl>
       </div>
+
+      <%= line_chart [{ name: "high", data: @forecast.seven_days.map { |d| [ d[:date], d[:high] ] } }, { name: "low", data: @forecast.seven_days.map { |d| [ d[:date], d[:low]]}}], title: "7 Day Extended Forecast" %>
     <% end %>
   <% end %>
 <% end %>

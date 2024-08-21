@@ -80,6 +80,7 @@ RSpec.describe OpenMeteoForecastService do
     expect(@service.forecast.seven_days).to be_a Array
     expect(@service.forecast.seven_days.size).to eq 7
     expect(@service.forecast.seven_days.last).to be_a Hash
+    expect(@service.forecast.seven_days.last[:date]).to eq Date.new(2024, 8, 26)
     expect(@service.forecast.seven_days.last[:high]).to eq 77.7
     expect(@service.forecast.seven_days.last[:low]).to eq 56.4
   end

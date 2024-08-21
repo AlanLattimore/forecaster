@@ -36,10 +36,11 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem "addressable", require: false
-gem "faraday"
-gem "faraday-detailed_logger"   # gives a one line log message which is more useful
-gem "view_component", "~> 3.13"
+gem "addressable", require: false   # for working with URIs.
+gem "chartkick"                     # JS charting package
+gem "faraday"                       # HTTP
+gem "faraday-detailed_logger"       # gives a one line log message which is more useful
+gem "view_component"                # View components
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

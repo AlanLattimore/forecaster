@@ -9,6 +9,7 @@ class OpenMeteoForecastService
 
   def forecast
     daily_data = meteorological_data["daily"]
+    dates = daily_data["time"].map { |iso_8601_date| Date.parse(iso_8601_date) }
     highs = daily_data["temperature_2m_max"]
     lows = daily_data["temperature_2m_min"]
     Forecast.new(
@@ -16,7 +17,7 @@ class OpenMeteoForecastService
       high: highs.first,
       low: lows.first,
       seven_days: 7.times.map do |index|
-        { high: highs[index], low: lows[index] }
+        { date: dates[index], high: highs[index], low: lows[index] }
       end
     )
   end
