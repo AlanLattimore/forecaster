@@ -42,6 +42,7 @@ class ForecastController < ApplicationController
     @address.zip = location.zip if @address.zip.blank?
     @address.assign_attributes(latitude: location.latitude, longitude: location.longitude)
 
+    @cached_results = true
     @forecast = Rails.cache.fetch("forecast/#{ @address.zip }", expires_in: 30.minutes) do
       meteorological_data = OpenMeteoMeteorologicalApiRequest.new(longitude: @address.longitude, latitude: @address.latitude)
       meteorological_data.get => { http_status:, error:, data: }
@@ -58,6 +59,7 @@ class ForecastController < ApplicationController
         return
       end
 
+      @cached_results = false
       OpenMeteoForecastService.new(meteorological_data: data).forecast
     end
     render :forecast
