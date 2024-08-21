@@ -39,22 +39,24 @@ class ForecastController < ApplicationController
     @address.zip = location.zip if @address.zip.blank?
     @address.assign_attributes(latitude: location.latitude, longitude: location.longitude)
 
-    meteorological_data = OpenMeteoMeteorologicalApiRequest.new(longitude: @address.longitude, latitude: @address.latitude)
-    meteorological_data.get => { http_status:, error:, data: }
+    @forecast = Rails.cache.fetch(@address.zip, expires_in: 30.minutes) do
+      meteorological_data = OpenMeteoMeteorologicalApiRequest.new(longitude: @address.longitude, latitude: @address.latitude)
+      meteorological_data.get => { http_status:, error:, data: }
 
-    if http_status != 200
-      flash.now.alert = "Something happened when Punxsutawney Phil -- our chief forecaster -- tripped over #{ http_status }: #{ error } while trying to help you. He thinks you should try again."
-      render :forecast
-      return
+      if http_status != 200
+        flash.now.alert = "Something happened when Punxsutawney Phil -- our chief forecaster -- tripped over #{ http_status }: #{ error } while trying to help you. He thinks you should try again."
+        render :forecast
+        return
+      end
+
+      if error.present?
+        flash.now.alert = "It looks like our chief forecaster -- Punxsutawney Phil -- wasn't quite fast enough and his search for your location timed out. He says to try again."
+        render :forecast
+        return
+      end
+
+      OpenMeteoForecastService.new(meteorological_data: data).forecast
     end
-
-    if error.present?
-      flash.now.alert = "It looks like our chief forecaster -- Punxsutawney Phil -- wasn't quite fast enough and his search for your location timed out. He says to try again."
-      render :forecast
-      return
-    end
-
-    @forecast = OpenMeteoForecastService.new(meteorological_data: data).forecast
     render :forecast
   end
 
