@@ -60,5 +60,7 @@ Documentation can be found here: https://geocoding.geo.census.gov/geocoder/Geoco
   than our SLA allows. Alert the engineers in the event of a switch over.
 * Close the request, query the data source in an async job, and lazy update the results. I don't like having request 
   threads open while waiting on results of an API call.
-* This implementation uses TurboStreams. With enough simultaneous connections, you might
-  need an alternative. AnyCable perhaps.
+* This implementation uses TurboStreams. With enough simultaneous connections, you might need an alternative. 
+  AnyCable perhaps.
+* Caching uses Rails memory cache which is cleared when the server is restarted. For production, a store like `redis`
+  or `memcache` might be an improvement. 

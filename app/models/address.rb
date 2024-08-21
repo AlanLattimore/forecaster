@@ -24,4 +24,15 @@ class Address
 
     urb.present? || municipio.present?
   end
+
+  def cache_key
+    case
+      when urbanized?
+        "#{ zip }-#{ state }-#{ municipio }-#{ city }-#{ urb }-#{ street }"
+      when zip.blank?
+        "#{ state }-#{ city }-#{ street }"
+      else
+        "#{ zip }-#{ street }"
+    end
+  end
 end
