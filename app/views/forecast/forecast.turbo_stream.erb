@@ -1,0 +1,65 @@
+<%= turbo_stream.replace "flash" do %>
+  <%= turbo_frame_tag "flash" do %>
+    <% if alert.present? %>
+      <div class="rounded-md bg-red-50 p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800">There was an error fetching your forecast</h3>
+            <div class="mt-2 text-sm text-red-700">
+              <% [*alert].each do |message_text| %>
+                <p><%= message_text %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% elsif flash.notice.present? %>
+      <div class="rounded-md bg-yellow-50 p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-yellow-800">Attention needed</h3>
+            <div class="mt-2 text-sm text-yellow-700">
+              <% [*flash.notice].each do |message_text| %>
+                <p><%= message_text %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace "forecast" do %>
+  <%= turbo_frame_tag "forecast" do %>
+    <% if @forecast.present? %>
+      <div>
+        <h3 class="text-base font-semibold leading-6 text-gray-900">Today's Weather</h3>
+        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-gray-500">Current Temperature</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= display_farenheit(temp: @forecast.current) %> ºF</dd>
+          </div>
+          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-gray-500">Today's High</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= display_farenheit(temp: @forecast.high) %> ºF</dd>
+          </div>
+          <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-gray-500">Today's Low</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= display_farenheit(temp: @forecast.low) %> ºF</dd>
+          </div>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
