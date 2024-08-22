@@ -4,18 +4,70 @@
 the day, and an advanced forecast -- houry expected temps for the next 24 hours; daily high/low for the next week for a
 given US address.
 
+## Scope
+
+1. Use Ruby On Rails.
+
+2. Accept an address as input.
+
+3. Retrieve forecast data for the given address. This should include, at minimum, the current temperature. Bonus points: retrieve high/low and/or extended forecast.
+
+4. Display the requested forecast details to the user.
+
+5. Cache the forecast details for 30 minutes for all subsequent requests by zip codes. Display indicator if result is pulled from cache.
+
 ## Setup
 
 This was developed on MacOS Sonoma 14.5 using `rbenv` as a ruby version manager. Some of the steps may be different for
 you.
 
-* Install Postgres v 15
-* Install ruby v 3.2.2:
-
+* Install and start Postgres. I used v 15 but the project doesn't depend on any special features of Postgres. Most
+  recent versions will work.
+* Install ruby v 3.2.2
+* Install `bundler`
 ```shell
-rbenv install 3.2.2
+gem install bundler
 ```
 * Download the code from GitHub
+* Install dependencies
+```shell
+bundle install
+```
+* Initialize the Postgres DB
+```shell
+rails db:create db:migrate
+```
+
+* run tests to double check installation
+```shell
+bundle exec rspec spec
+```
+* start the rails server
+```shell
+./bin/dev
+```
+* Open `localhost:3000` in the browser of your choice.
+
+## Documentation
+This project uses `yard` for documentation.
+
+Install `yard` with:
+```shell
+gem install yard
+```
+
+Compile the documentation locally with:
+```shell
+yard doc
+```
+
+Start the `yard` server with:
+```shell
+yard server
+```
+
+View the documentation by opening a browser of your choice and directing it to:
+`localhost:8808`
 
 ## Meteorological Data using OpenMeteo
 The primary factor behind selecting OpenMeteo as a meteorological data vendor: the service doesn't require an account or a key.

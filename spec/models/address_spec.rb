@@ -1,4 +1,6 @@
-require "rspec"
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe Address, type: :model do
   context "outside of Puerto Rico " do

@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# A class representing an US address including Puerto Rico.
+# An Urbanized address must have at least street, urb, and municipio.
+# Other addresses must have either street and zip OR street, city, and state at a minumum.
 class Address
   include ActiveModel::Model
   include ActiveModel::Attributes
@@ -18,6 +21,8 @@ class Address
   validates :city, :state, presence: true, if: ->(address) { !address.urbanized? && address.zip.blank? }
   validates :zip, presence: true, unless: ->(address) { address.urbanized? || (address.city.present? && address.state.present?) }
 
+  # A predicate reflecting whether an address should be treated as a urbanized or not.
+  # @return [Boolean] true if the address should be treated as urbanized.
   def urbanized?
     return false if zip.present?
     return false if city.present? && state.present?
@@ -25,6 +30,9 @@ class Address
     urb.present? || municipio.present?
   end
 
+  # Calcualate a suitable cache key based on the 3 valid types of addresses.
+  # @return [String] a cache key suited for caching address associated information such as longitude/latitude
+  #   from a geolocation service
   def cache_key
     case
       when urbanized?

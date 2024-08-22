@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# A lightweight class to encapsulate geolocation information.
 class Location
   include ActiveModel::Model
   include ActiveModel::Attributes
