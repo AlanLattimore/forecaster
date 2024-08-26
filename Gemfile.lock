@@ -105,12 +105,12 @@ GEM
     diff-lcs (1.5.1)
     drb (2.2.1)
     erubi (1.13.0)
-    faraday (2.10.1)
-      faraday-net_http (>= 2.0, < 3.2)
+    faraday (2.11.0)
+      faraday-net_http (>= 2.0, < 3.4)
       logger
     faraday-detailed_logger (2.5.0)
       faraday (>= 0.16, < 3)
-    faraday-net_http (3.1.1)
+    faraday-net_http (3.3.0)
       net-http
     globalid (1.2.1)
       activesupport (>= 6.1)
